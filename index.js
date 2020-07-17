@@ -3,12 +3,13 @@ const cors = require('cors')
 
 const app = express();
 
-const PORT = 2000
+// const PORT = 2000
 
 app.use(cors())
 // ? Create sever listening for requests on PORT
-app.listen(PORT || 3000, () => {
-    console.log(`App listening on port ${PORT}!`);
+app.listen(process.env.PORT || 3000, () => {
+    // console.log(`App listening on port ${PORT}!`);
+    console.log(`App listening on port!`);
 });
 
 // ? Returns random Cat Pic 
