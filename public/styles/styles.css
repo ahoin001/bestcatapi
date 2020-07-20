@@ -1,0 +1,55 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+.pic-container {
+  margin: 0 auto;
+
+  width: 900px;
+  height: 800px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+
+  font-size: 2rem;
+}
+
+.vote-bttn {
+  padding: 12px;
+}
+
+/* *********************************** */
+
+.loved-container {
+  margin: 40px auto;
+
+  text-align: center;
+
+  font-size: 3rem;
+
+  width: 700px;
+  height: 600px;
+}
+
+.loved-cat-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fav-cat {
+  width: 100%;
+  height: 500px;
+}
