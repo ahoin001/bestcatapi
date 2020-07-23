@@ -7,6 +7,7 @@ let randomCatPic = document.querySelector("img")
 
 let lovedCatContainer = document.querySelector("div.loved-container")
 let lovedCatPicsList = document.querySelector(".loved-cat-list")
+let catNameList = document.querySelector(".catname-list")
 
 let voteButtons = document.querySelectorAll(".vote-bttn")
 
@@ -67,29 +68,72 @@ const fetchCatApi = async (url = "https://api.thecatapi.com/v1/images/search", r
 const setRandomCat = async () => {
 
     // Uses CatApi
-    const apiResponse = await fetchCatApi();
+    // const apiResponse = await fetchCatApi();
 
-    randomCatPic.setAttribute("src", apiResponse[0].url)
+    // randomCatPic.setAttribute("src", apiResponse[0].url)
 
-    catImageID = apiResponse[0].id;
+    // catImageID = apiResponse[0].id;
 
 
     // Uses practice API
-    // const challengeApi = await fetchCatApi("http://localhost:2000/randomcat")
-    // console.log("FROM MY API: ", challengeApi.catPicUrl)
+    const challengeApi = await fetchCatApi("http://localhost:2000/randomcat")
+    console.log("FROM MY API: ", challengeApi.catPicUrl)
 
-    // randomCatPic.setAttribute("src", challengeApi.catPicUrl)
-    // catImageID = challengeApi;
+    randomCatPic.setAttribute("src", challengeApi.catPicUrl)
+    catImageID = challengeApi;
 
 }
 
 const postVoteToCatApi = async (requestBody) => {
 
-    let response = await fetchCatApi("https://api.thecatapi.com/v1/votes", "POST", requestBody)
+    let response = await fetchCatApi("https://api.thecatapi.com/v1/votes", "POST", requestBody);
 
     console.log('Post Request:', response);
 
 }
+
+const addCatName = async () => {
+
+    const catName = document.getElementById("catName").value;
+
+    console.log(`Cat Name: `, catName)
+
+    const requestBody = JSON.stringify({
+        catName
+    })
+
+    let challengeApiResponse;
+
+    try {
+        challengeApiResponse = await fetch(
+
+            "http://localhost:2000/catname",
+            {
+                method: 'POST',
+                body: requestBody,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    let dataParsed = await challengeApiResponse.json();
+
+    console.log('Challenge Response: ', dataParsed.status)
+
+    let newCatName = document.createElement("li");
+
+    newCatName.setAttribute("class", "catList-item")
+
+    newCatName.textContent += catName;
+
+    catNameList.appendChild(newCatName)
+
+}
+
 
 const lovedCat = async (catImageId) => {
 
@@ -114,7 +158,6 @@ const lovedCat = async (catImageId) => {
     voteButtons.forEach(bttn => {
         bttn.disabled = false;
     })
-
 
 }
 

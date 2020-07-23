@@ -1,6 +1,7 @@
 const path = require('path')
-const cors = require('cors')
 
+const cors = require('cors')
+const bodyParser = require('body-parser');
 const express = require('express')
 
 const app = express();
@@ -11,6 +12,10 @@ const publicDirectory = path.join(__dirname,'../public')
 // Allow Clients to access api
 app.use(cors())
 
+// support parsing of application/json type post data
+app.use(bodyParser.json());
+
+// set static assets for use
 app.use(express.static(publicDirectory))
 
 // ? Create sever listening for requests on PORT
@@ -21,6 +26,8 @@ app.listen(process.env.PORT || 2000, () => {
         console.log(`App listening on port! 2000`);
     }
 });
+
+const nameList =[];
 
 // ? Returns random Cat Pic 
 app.get('/randomcat', (req, res) => {
@@ -49,6 +56,16 @@ app.get('/randomcat', (req, res) => {
 
     res.json({
         catPicUrl: randomPics[randomPicIndex]
+    })
+
+});
+
+app.post('/catname', (req, res) => {
+    
+    // console.log('Request Body: ',req.body)
+
+    res.json({
+        status: 'Success Addition!'
     })
 
 });
