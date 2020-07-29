@@ -68,7 +68,9 @@ const fetchCatApi = async (url = "https://api.thecatapi.com/v1/images/search", r
 const setRandomCat = async () => {
 
     // Uses CatApi
-    // const apiResponse = await fetchCatApi();
+    const apiResponse = await fetchCatApi();
+    console.log("***FROM MY CATAPI: ", apiResponse)
+
 
     // randomCatPic.setAttribute("src", apiResponse[0].url)
 

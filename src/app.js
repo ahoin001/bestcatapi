@@ -1,9 +1,15 @@
+// built i node moudules
 const path = require('path')
 
+// npm modules
+require('dotenv').config()
+const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const express = require('express')
 
+import models, { sequelize } from './models';
+
+// routes
 const catRoutes = require('../routes/cat-routes');
 
 const app = express();
