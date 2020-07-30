@@ -1,21 +1,37 @@
-// built i node moudules
-const path = require('path')
+// core modules
+import path from 'path'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-// npm modules
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser');
-
-import models, { sequelize } from './models';
+// npm packages
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import dotenv from "dotenv";
+dotenv.config()
 
 // routes
-const catRoutes = require('../routes/cat-routes');
+import { router as catRoutes } from '../routes/cat-routes.js';
+
+// database
+import db from './config/database.js'
+
+// ? to define __dirname in node 10+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const publicDirectory = path.join(__dirname, '../public')
 
 const app = express();
 
-console.log(path.join(__dirname, '../public/'))
-const publicDirectory = path.join(__dirname,'../public')
+const testdb = async () => {
+    try {
+        await db.authenticate();
+        console.log(`Connection to ${process.env.DATABASE} has been established successfully.`);
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
+
+testdb()
 
 // Allow Clients to access api
 app.use(cors())

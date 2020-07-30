@@ -8,7 +8,6 @@
     "dev": "nodemon ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "keywords": [
     "ES",
     "MODULES",
@@ -16,6 +15,7 @@
     "MODULES",
     "JS"
   ],
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
