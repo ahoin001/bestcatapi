@@ -69,7 +69,7 @@ const setRandomCat = async () => {
 
     // Uses CatApi
     const apiResponse = await fetchCatApi();
-    console.log("***FROM MY CATAPI: ", apiResponse)
+    console.log("***FROM MAIN CATAPI: ", apiResponse)
 
 
     // randomCatPic.setAttribute("src", apiResponse[0].url)
@@ -133,6 +133,52 @@ const addCatName = async () => {
     newCatName.textContent += catName;
 
     catNameList.appendChild(newCatName)
+
+}
+
+const addCatToCatBase = async () => {
+
+    const catId = document.getElementById("catId").value;
+    const catImageUrl = document.getElementById("catPic").value;
+
+    console.log(`Cat ID: `, catId)
+    console.log(`Cat URL: `, catImageUrl)
+
+    const requestBody = JSON.stringify({
+        catId,
+        catImageUrl
+    })
+
+    let challengeApiResponse;
+
+    try {
+        challengeApiResponse = await fetch(
+
+            // "http://localhost:2000/catname",
+            "http://localhost:2000/catbase",
+            {
+                method: 'POST',
+                body: requestBody,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    let dataParsed = await challengeApiResponse;
+
+    console.log('Challenge Response: ', dataParsed.status)
+
+    // let newCatName = document.createElement("li");
+
+    // newCatName.setAttribute("class", "catList-item")
+
+    // newCatName.textContent += 'Cat Added!';
+
+    // catNameList.appendChild(newCatName)
 
 }
 
