@@ -15,6 +15,9 @@
   },
   "production": {
     "use_env_variable": "postgresql-cylindrical-57741",
+    "username": "mydev",
+    "password": "mydev",
+    "database": "catsdatabase",
     "dialect": "postgres"
   }
 }
