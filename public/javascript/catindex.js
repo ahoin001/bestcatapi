@@ -18,6 +18,7 @@ let lovedCats = [];
 const sub_id = `CatLady${Math.floor(Math.random() * 300000)}`;
 console.log(sub_id)
 
+// import axios from '../../axios'
 
 // ****************************************************************
 //? API INTERACTIONs
@@ -79,7 +80,7 @@ const setRandomCat = async () => {
 
     // Uses practice API
     const challengeApi = await fetchCatApi("http://localhost:2000/randomcat")
-    console.log("FROM MY API: ", challengeApi.catPicUrl)
+    console.log("FROM MY API: ", challengeApi)
 
     randomCatPic.setAttribute("src", challengeApi.catPicUrl)
     catImageID = challengeApi;
@@ -133,52 +134,6 @@ const addCatName = async () => {
     newCatName.textContent += catName;
 
     catNameList.appendChild(newCatName)
-
-}
-
-const addCatToCatBase = async () => {
-
-    const catId = document.getElementById("catId").value;
-    const catImageUrl = document.getElementById("catPic").value;
-
-    console.log(`Cat ID: `, catId)
-    console.log(`Cat URL: `, catImageUrl)
-
-    const requestBody = JSON.stringify({
-        catId,
-        catImageUrl
-    })
-
-    let challengeApiResponse;
-
-    try {
-        challengeApiResponse = await fetch(
-
-            // "http://localhost:2000/catname",
-            "http://localhost:2000/catbase",
-            {
-                method: 'POST',
-                body: requestBody,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-
-    } catch (error) {
-        console.log(error)
-    }
-
-    let dataParsed = await challengeApiResponse;
-
-    console.log('Challenge Response: ', dataParsed.status)
-
-    // let newCatName = document.createElement("li");
-
-    // newCatName.setAttribute("class", "catList-item")
-
-    // newCatName.textContent += 'Cat Added!';
-
-    // catNameList.appendChild(newCatName)
 
 }
 
@@ -267,4 +222,125 @@ const getVotedCats = async () => {
 //? FUNCTIONS In action 
 // ****************************************************************
 
+
+
+
 setRandomCat()
+
+// ****************************************************************
+//? Database Using Functions
+// ****************************************************************
+
+const setRandomCatFromDatabase = async () => {
+
+    const catsInDatabase = await fetchCatApi("http://localhost:2000/cats")
+    console.log("FROM MY API: ", catsInDatabase)
+
+    // randomCatPic.setAttribute("src", challengeApi.catPicUrl)
+    // catImageID = challengeApi;
+
+}
+
+
+const addCatToCatBase = async () => {
+
+    const catId = document.getElementById("catId").value;
+    const catImageUrl = document.getElementById("catPic").value;
+
+    console.log(`Cat ID: `, catId)
+    console.log(`Cat URL: `, catImageUrl)
+
+    const requestBody = JSON.stringify({
+        catId,
+        catImageUrl
+    })
+
+    let addedCatToDatabaseResponse;
+
+    try {
+        addedCatToDatabaseResponse = await fetch(
+
+            "http://localhost:2000/cats",
+            {
+                method: 'POST',
+                body: requestBody,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    let dataParsed = await addedCatToDatabaseResponse;
+
+    console.log('Challenge Response From Deleting Cat: ', dataParsed.status)
+
+}
+
+
+const getCats = async () => {
+
+    let challengeApiResponse;
+
+    try {
+        challengeApiResponse = await fetch(
+
+            "http://localhost:2000/cats",
+            {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+        console.log(`(FRONTEND) RESPONSE: `)
+        challengeApiResponse.json()
+            .then((response) => {
+                console.log(response)
+            })
+            .catch(err => console.log(err))
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+const deleteCatFromDatabase = async () => {
+
+    const idOfCatToDelete = document.getElementById("catId").value;
+    console.log(`(FE) ID of Cat to be deleted: `,idOfCatToDelete)
+
+    let responseAfterDeletingCat;
+
+    try {
+
+        responseAfterDeletingCat = await fetch(
+
+            `http://localhost:2000/cats/${idOfCatToDelete}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+    responseAfterDeletingCat.json()
+    .then((response) => {
+        console.log('DELETE RESPONSE: ',response.message)
+    })
+    .catch(err => console.log(err))
+
+}
+
+
+
+
