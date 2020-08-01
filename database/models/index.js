@@ -19,7 +19,6 @@ const db = {};
 let sequelize;
 if (config.use_env_variable) {
 
-
   // my attempt
   sequelize = new Sequelize(config.use_env_variable, null, null, {
     dialect: 'postgres'
