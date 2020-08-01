@@ -49,6 +49,22 @@ const getApiKeyDynamically = async () => {
 
     } catch (error) {
         console.log(error)
+
+        response = await fetch(
+            "http://localhost:2000/apikeys",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+        apiObject = await response.json()
+
+        apiEnvironment = apiObject.status;
+
+        console.log(`Environment: `, apiEnvironment)
+
     }
 
 
