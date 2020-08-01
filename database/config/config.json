@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "process.env.DATABASE_URL",
+    "use_env_variable": "postgresql-cylindrical-57741",
     "dialect": "postgres"
   }
 }
