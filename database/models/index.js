@@ -20,12 +20,12 @@ let sequelize;
 if (config.use_env_variable) {
 
   // my attempt
-  sequelize = new Sequelize(config.use_env_variable, null, null, {
-    dialect: 'postgres'
-  });
+  // sequelize = new Sequelize(config.use_env_variable, null, null, {
+  //   dialect: 'postgres'
+  // });
 
   // line that was here
-  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
