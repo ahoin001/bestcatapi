@@ -74,7 +74,7 @@ const getApiKeyDynamically = async () => {
 
     } else if (apiEnvironment === 'production') {
 
-        apiUrl = "https://bootleg-cat-api.herokuapp.com/"
+        apiUrl = "https://bootleg-cat-api.herokuapp.com"
 
     } else {
         console.log('Did not get environment');
@@ -214,7 +214,8 @@ const loveCatVoteToDatabase = async () => {
     try {
 
         const responseAfterUpdatingCat = await fetchCatDatabaseApi(
-            "http://localhost:2000/cats",
+            // "http://localhost:2000/cats",
+            `${apiUrl}/cats`,
             "PATCH",
             requestBodyLovedCat)
 
