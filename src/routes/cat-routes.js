@@ -20,6 +20,8 @@ router.patch('/cats', catController.updateCatLovedInDB);
 
 router.delete('/cats/:catIdToDelete', catController.deleteCatFromDB);
 
+// router.delete('/cats/', catController.deleteCatFromDB);
+
 
 // ? Returns random Cat Pic 
 router.get('/randomcat', (req, res) => {
@@ -44,8 +46,8 @@ router.get('/randomcat', (req, res) => {
 
     ];
 
-    let randomPicIndex = Math.floor(Math.random() * randomPics.length);
-
+    let randomPicIndex = Math.floor(Math.random() * Math.floor((Math.random() * randomPics.length) + 1));
+    
     res.json({
         catPicUrl: randomPics[randomPicIndex]
     })

@@ -137,7 +137,9 @@ const setRandomCatFromDatabase = async () => {
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
-            let randomCatIndex = Math.floor(Math.random() * theListOfCats.length - 1);
+            let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length -1) + 1);
+
+            console.log('INDEX OF RANDOM: ',randomCatIndex)
 
             const { catId, catImageUrl } = theListOfCats[randomCatIndex]
 
@@ -219,12 +221,13 @@ const deleteCatFromDatabase = async () => {
 
     const idOfCatToDelete = document.getElementById("catId").value;
 
-    // console.log(`(FE) ID of Cat to be deleted: `,idOfCatToDelete)
+    console.log(`(FE) ID of Cat to be deleted: `,idOfCatToDelete)
 
     try {
 
         const DeletedCatFromDatabaseResponse = await fetchCatDatabaseApi(
-            `http://localhost:2000/cats/${idOfCatToDelete}`,
+            // `http://localhost:2000/cats/${idOfCatToDelete}`,
+            `${apiUrl}/cats/${idOfCatToDelete}`,
             "DELETE",
         )
 
