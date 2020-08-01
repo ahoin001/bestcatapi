@@ -15,7 +15,7 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: process `,config)
+: BAM BAM `,config)
 
 let sequelize;
 if (config.use_env_variable) {
