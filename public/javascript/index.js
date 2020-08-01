@@ -28,6 +28,8 @@ console.log(sub_id)
 // ? Default fetch to database will be a get request returning all cats
 const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestType = "GET", requestBody) => {
 
+    console.log(`About to fetch`)
+
     let response;
 
     if (requestType === "GET") {
@@ -61,6 +63,8 @@ const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestTy
                     }
                 })
 
+            response.then((thing) => console.log('&&&&&&&&&&: ', thing))
+
         } catch (error) {
             console.log(error)
         }
@@ -68,10 +72,13 @@ const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestTy
 
     }
 
-    // So .json won't have to be called everywhere
-    let dataParsed = await response.json();
+    console.log(`HERE IS WHERE JSON ISSUES ARE`)
 
-    return dataParsed;
+    // So .json won't have to be called everywhere
+    // let dataParsed = await response.json();
+
+
+    return response;
 
 }
 
@@ -98,7 +105,7 @@ const setRandomCatFromDatabase = async () => {
 
         })
 
-    await getVotedCatsFromDatabase()
+    // await getVotedCatsFromDatabase()
 
 }
 
@@ -194,7 +201,8 @@ const getVotedCatsFromDatabase = async () => {
 
         lovedCatsFromDatabaseResponse = await fetchCatDatabaseApi(`http://localhost:2000/lovedcats`,)
 
-        console.log('Cats loved From Database: ', lovedCatsFromDatabaseResponse.lovedCats)
+        // console.log('Cats loved From Database: ', JSON.parse(lovedCatsFromDatabaseResponse))
+        // console.log('Cats loved From Database: ', lovedCatsFromDatabaseResponse.lovedCats)
 
     } catch (error) {
         console.log(error)

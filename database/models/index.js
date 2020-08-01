@@ -12,6 +12,7 @@ console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 const config = require(__dirname + '/../config/config.json')[env];
 // const config = require(__dirname + '/../config/config.js')[env];
+
 const db = {};
 
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -20,16 +21,13 @@ console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 let sequelize;
 if (config.use_env_variable) {
 
-  // 1 attempt
-  sequelize = new Sequelize(config.use_env_variable, null, null, {
-    dialect: 'postgres'
-  });
-
-  // 2 attempt
-  // sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // my attempt
+  // sequelize = new Sequelize(config.use_env_variable, null, null, {
+  //   dialect: 'postgres'
+  // });
 
   // line that was here
-  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

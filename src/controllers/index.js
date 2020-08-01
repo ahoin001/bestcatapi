@@ -25,10 +25,13 @@ const addCatToDB = async (req, res) => {
 
 const getCatsFromDB = async (req, res) => {
 
+    console.log('(BACKEND) gbquqebiogbibqegbiopg')
+
+
     try {
         const cats = await Cat.findAll();
 
-        // console.log('(BACKEND) QUERYING CAT DATABASE :', cats)
+        console.log('(BACKEND) QUERYING CAT DATABASE :', cats)
 
         return res.json({
             cats
@@ -49,7 +52,7 @@ const getlovedCatsFromDB = async (req, res) => {
             }
         });
 
-        // console.log('(BACKEND) QUERYING CAT DATABASE :', lovedCats)
+        console.log('(BACKEND) QUERYING CAT DATABASE :', lovedCats)
 
         return res.json({
             lovedCats
@@ -89,11 +92,11 @@ const updateCatLovedInDB = async (req, res) => {
 
 const deleteCatFromDB = async (req, res) => {
 
-    console.log(`$$$$$ req `,req.params.catIdToDelete)
+    console.log(`$$$$$ req `, req.params.catIdToDelete)
     // ? Use catid from http request url
     const { catIdToDelete } = req.params
-    console.log(`$$$$$ req `,catIdToDelete)
-    
+    console.log(`$$$$$ req `, catIdToDelete)
+
     try {
 
         await Cat.destroy({
