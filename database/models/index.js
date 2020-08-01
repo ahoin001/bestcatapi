@@ -9,9 +9,13 @@ const env = process.env.NODE_ENV || 'development';
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 : nodenev `,env)
 
-// const config = require(__dirname + '/../config/config.json')[env];
-const config = require(__dirname + '/../config/config.js')[env];
+
+const config = require(__dirname + '/../config/config.json')[env];
+// const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
+
+console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+: process `,config)
 
 let sequelize;
 if (config.use_env_variable) {
