@@ -12,7 +12,7 @@ const catRoutes = require('./routes/cat-routes');
 const app = express();
 
 
-const port = 2000 || process.env.PORT;
+const port = process.env.PORT || 2000;
 
 // Allow Clients to access api
 app.use(cors())
