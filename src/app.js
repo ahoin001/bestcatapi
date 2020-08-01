@@ -5,13 +5,9 @@ path = require('path')
 require('dotenv').config()
 express = require('express')
 cors = require('cors')
-bodyParser = require('body-parser')
-
 
 // routes
 const catRoutes = require('./routes/cat-routes');
-
-const publicDirectory = path.join(__dirname, '../public')
 
 const app = express();
 
@@ -19,12 +15,10 @@ const app = express();
 app.use(cors())
 
 // support parsing of application/json type post data
-app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(express.json());
 
 // set static assets for use
-app.use(express.static(publicDirectory))
+app.use(express.static( path.join(__dirname, '../public')))
 
 app.use('/', catRoutes);
 
