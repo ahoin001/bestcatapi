@@ -20,9 +20,13 @@ console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 let sequelize;
 if (config.use_env_variable) {
 
-  sequelize = new Sequelize(config.use_env_variable, null, null, {
-    dialect: 'postgres'
-  });
+  // 1 attempt
+  // sequelize = new Sequelize(config.use_env_variable, null, null, {
+  //   dialect: 'postgres'
+  // });
+
+  // 2 attempt
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 
   // line that was here
   // sequelize = new Sequelize(process.env[config.use_env_variable], config);
