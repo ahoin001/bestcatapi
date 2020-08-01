@@ -15,18 +15,18 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: Config Object `, config)
+: Config OBJECT `, config)
 
 let sequelize;
 if (config.use_env_variable) {
 
   // 1 attempt
-  // sequelize = new Sequelize(config.use_env_variable, null, null, {
-  //   dialect: 'postgres'
-  // });
+  sequelize = new Sequelize(config.use_env_variable, null, null, {
+    dialect: 'postgres'
+  });
 
   // 2 attempt
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // sequelize = new Sequelize(config.database, config.username, config.password, config);
 
   // line that was here
   // sequelize = new Sequelize(process.env[config.use_env_variable], config);
