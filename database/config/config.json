@@ -14,10 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "mydev",
-    "password":  "mydev",
-    "database": "catsdatabase",
-    "host": "127.0.0.1",
+    "use_env_variable": "process.env.DATABASE_URL",
     "dialect": "postgres"
   }
 }
