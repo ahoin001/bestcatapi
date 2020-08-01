@@ -14,7 +14,7 @@ router.post('/cats', catController.addCatToDB);
 
 router.get('/cats', catController.getCatsFromDB);
 
-router.get('/lovedcats', catController.getlovedCatsFromDB);
+router.get('/cats/lovedcats', catController.getlovedCatsFromDB);
 
 router.patch('/cats', catController.updateCatLovedInDB);
 

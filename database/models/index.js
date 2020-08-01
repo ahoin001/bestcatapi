@@ -1,33 +1,33 @@
 'use strict';
-require('dotenv').config();
 
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: ENV `, env)
 
+console.log(`@@@@@@@@@@@@@@@@@@@`, env)
 
-const config = require(__dirname + '/../config/config.json')[env];
-// const config = require(__dirname + '/../config/config.js')[env];
+// const config = require(__dirname + '/../config/config.json')[env];
+
+const config = require(__dirname + '/../config/config.js')[env];
+
+console.log(`@@@@@@@@@@@@@@: `,config)
 
 const db = {};
-
-console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: Config OBJECT `, config)
 
 let sequelize;
 if (config.use_env_variable) {
 
+
   // my attempt
-  // sequelize = new Sequelize(config.use_env_variable, null, null, {
-  //   dialect: 'postgres'
-  // });
+  sequelize = new Sequelize(config.use_env_variable, null, null, {
+    dialect: 'postgres'
+  });
 
   // line that was here
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  // sequelize = new Sequelize(process.env[config.use_env_variable], config);
+
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

@@ -16,9 +16,58 @@ let voteButtons = document.querySelectorAll(".vote-bttn")
 let catImageID;
 let lovedCats = [];
 
+let apiUrl;
+
 
 const sub_id = `CatLady${Math.floor(Math.random() * 300000)}`;
-console.log(sub_id)
+// console.log(sub_id)
+
+// ****************************************************************
+//? CONNECT TO DOM  & INITIALIZE VARIABLES
+// ****************************************************************
+
+const getApiKeyDynamically = async () => {
+
+    let apiEnvironment;
+
+    try {
+
+        response = await fetch(
+            "http://localhost:2000/apikeys",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+        apiObject = await response.json()
+
+        apiEnvironment = apiObject.status;
+
+        console.log(`Environment: `, apiEnvironment)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+    if (apiEnvironment === 'development') {
+
+        apiUrl = "http://localhost:2000"
+
+    } else if (apiEnvironment === 'production') {
+
+        apiUrl = "https://bootleg-cat-api.herokuapp.com/"
+
+    } else {
+        console.log('Did not get environment');
+    }
+
+    await setRandomCatFromDatabase();
+
+}
+
 
 // ****************************************************************
 //? CATDATABASE FUNCTIONS (RECREATED CAT API FOR PRACTICE)
@@ -26,9 +75,9 @@ console.log(sub_id)
 
 
 // ? Default fetch to database will be a get request returning all cats
-const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestType = "GET", requestBody) => {
+const fetchCatDatabaseApi = async (url = `${apiUrl}/cats`, requestType = "GET", requestBody) => {
 
-    console.log(`About to fetch`)
+    console.log('URL To Hit: ', apiUrl)
 
     let response;
 
@@ -63,8 +112,6 @@ const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestTy
                     }
                 })
 
-            response.then((thing) => console.log('&&&&&&&&&&: ', thing))
-
         } catch (error) {
             console.log(error)
         }
@@ -72,13 +119,10 @@ const fetchCatDatabaseApi = async (url = "http://localhost:2000/cats", requestTy
 
     }
 
-    console.log(`HERE IS WHERE JSON ISSUES ARE`)
-
     // So .json won't have to be called everywhere
-    // let dataParsed = await response.json();
+    let dataParsed = await response.json();
 
-
-    return response;
+    return dataParsed;
 
 }
 
@@ -93,7 +137,7 @@ const setRandomCatFromDatabase = async () => {
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
-            let randomCatIndex = Math.floor(Math.random() * theListOfCats.length);
+            let randomCatIndex = Math.floor(Math.random() * theListOfCats.length - 1);
 
             const { catId, catImageUrl } = theListOfCats[randomCatIndex]
 
@@ -105,7 +149,7 @@ const setRandomCatFromDatabase = async () => {
 
         })
 
-    // await getVotedCatsFromDatabase()
+    await getVotedCatsFromDatabase()
 
 }
 
@@ -122,7 +166,7 @@ const addCatToCatBase = async () => {
     try {
 
         const addedCatToDatabaseResponse = await fetchCatDatabaseApi(
-            "http://localhost:2000/cats",
+            `${apiUrl}/cats`,
             "POST",
             requestBody)
 
@@ -199,10 +243,9 @@ const getVotedCatsFromDatabase = async () => {
 
     try {
 
-        lovedCatsFromDatabaseResponse = await fetchCatDatabaseApi(`http://localhost:2000/lovedcats`,)
+        lovedCatsFromDatabaseResponse = await fetchCatDatabaseApi(`${apiUrl}/cats/lovedcats`,)
 
-        // console.log('Cats loved From Database: ', JSON.parse(lovedCatsFromDatabaseResponse))
-        // console.log('Cats loved From Database: ', lovedCatsFromDatabaseResponse.lovedCats)
+        console.log('Cats loved From Database: ', lovedCatsFromDatabaseResponse.lovedCats)
 
     } catch (error) {
         console.log(error)
@@ -246,4 +289,4 @@ const getVotedCatsFromDatabase = async () => {
 
 }
 
-setRandomCatFromDatabase()
+// setRandomCatFromDatabase()

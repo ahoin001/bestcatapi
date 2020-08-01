@@ -12,7 +12,7 @@ const catRoutes = require('./routes/cat-routes');
 const app = express();
 
 
-const port = process.env.PORT || 2000;
+const port = 2000 || process.env.PORT;
 
 // Allow Clients to access api
 app.use(cors())
@@ -23,13 +23,13 @@ app.use(express.json());
 // set static assets for use
 app.use(express.static( path.join(__dirname, '../public')))
 
-// handle every other route with index.html, which will contain
-// a script tag to your application's JavaScript file(s).
-app.get('*', function (request, response){
-    response.sendFile(path.resolve(__dirname, '../public', 'index.html'));
-});
-
 app.use('/', catRoutes);
+
+app.get('/apikeys', (req, res) => {
+    res.json({
+        status: process.env.NODE_ENV || 'development',
+    })
+});
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port} !`),
