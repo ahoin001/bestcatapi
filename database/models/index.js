@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: nodenev `,env)
+: nodenev `, env)
 
 
 const config = require(__dirname + '/../config/config.json')[env];
@@ -15,12 +15,12 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-: BAM BAM `,config)
+: BAM BAM `, config)
 
 let sequelize;
 if (config.use_env_variable) {
-  
-  sequelize = new Sequelize(config.use_env_variable,{
+
+  sequelize = new Sequelize(config.use_env_variable, null, null, {
     dialect: 'postgres'
   });
 
