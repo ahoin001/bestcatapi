@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
-    <script src="./javascript/catindex.js" defer></script>
+    <script src="./javascript/index-using-catapi.js" defer></script>
+    <script src="./javascript/index.js" defer></script>
     <title>Cats</title>
 </head>
 
@@ -25,16 +26,24 @@
 
     <div class="buttons-container">
 
-        <button class="bttn" onclick="lovedCat(catImageID)">
+        <!-- If using cat api use these -->
+
+        <!-- <button class="bttn" onclick="lovedCat(catImageID)">
             LOVE IT
         </button>
 
         <button class="bttn" onclick="nopedCat(catImageID)">
             NOPE IT
+        </button> -->
+
+        <!-- For my database/backend practice use these -->
+
+        <button class="bttn" onclick="setRandomCatFromDatabase()">
+            Get Random Cat
         </button>
 
-        <button class="bttn" onclick="getCats()">
-            Get Cats
+        <button class="bttn" onclick="loveCatVoteToDatabase()">
+            Love Cat
         </button>
 
         <button class="bttn" onclick="deleteCatFromDatabase()">
@@ -57,9 +66,7 @@
 
             <input id="catId" type="text" placeholder="Enter cat id">
             <input id="catPic" type="text" placeholder="Enter cat image url">
-            <button class="bttn" onclick="addCatName()">
-                Add Name
-            </button>
+   
             <button class="bttn" onclick="addCatToCatBase()">
                 Add To Catbase
             </button>

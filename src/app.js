@@ -19,7 +19,7 @@ const app = express();
 app.use(cors())
 
 // support parsing of application/json type post data
-app.use(express.json());
+app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 
