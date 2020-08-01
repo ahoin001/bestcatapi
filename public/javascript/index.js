@@ -51,7 +51,7 @@ const getApiKeyDynamically = async () => {
         console.log(error)
 
         response = await fetch(
-            "http://localhost:2000/apikeys",
+            "https://bootleg-cat-api.herokuapp.com/apikeys",
             {
                 method: "GET",
                 headers: {
