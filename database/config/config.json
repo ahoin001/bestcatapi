@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "mydev",
+    "password": "mydev",
+    "database": "catsdatabase",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "mydev",
+    "password": "mydev",
+    "database": "catsdatabase",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "mydev",
+    "password":  "mydev",
+    "database": "catsdatabase",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

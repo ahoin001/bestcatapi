@@ -11,6 +11,9 @@ const catRoutes = require('./routes/cat-routes');
 
 const app = express();
 
+
+const port = 2000 || process.env.PORT;
+
 // Allow Clients to access api
 app.use(cors())
 
@@ -22,6 +25,6 @@ app.use(express.static( path.join(__dirname, '../public')))
 
 app.use('/', catRoutes);
 
-app.listen(process.env.PORT, () =>
-    console.log(`Example app listening on port ${process.env.PORT} !`),
+app.listen(port, () =>
+    console.log(`Example app listening on port ${port} !`),
 );
