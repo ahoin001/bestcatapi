@@ -155,7 +155,7 @@ const fetchCatDatabaseApi = async (url = `${apiUrl}/cats`, requestType = "GET", 
 
 const setRandomCatFromDatabase = async () => {
 
-    const databaseResponseFromFindCatsQuery = await fetchCatDatabaseApi();
+    const databaseResponseFromFindCatsQuery = fetchCatDatabaseApi();
 
     databaseResponseFromFindCatsQuery
         .then((objectReturnedFromQueryHoldingCatTable) => {
