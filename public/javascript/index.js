@@ -30,26 +30,26 @@ const getApiKeyDynamically = async () => {
 
     let apiEnvironment;
 
-    try {
+    // try {
 
-        response = await fetch(
-            "http://localhost:2000/apikeys",
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+    //     response = await fetch(
+    //         "http://localhost:2000/apikeys",
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             }
+    //         })
 
-        apiObject = await response.json()
+    //     apiObject = await response.json()
 
-        apiEnvironment = apiObject.status;
+    //     apiEnvironment = apiObject.status;
 
-        console.log(`Environment: `, apiEnvironment)
+    //     console.log(`Environment: `, apiEnvironment)
 
-    } catch (error) {
-        console.log(error)
-    }
+    // } catch (error) {
+    //     console.log(error)
+    // }
 
     if (apiEnvironment !== 'development') {
         try {
@@ -79,7 +79,7 @@ const getApiKeyDynamically = async () => {
 
     } else if (apiEnvironment === 'production') {
 
-        apiUrl = "https://afternoon-oasis-64306.herokuapp.com/"
+        apiUrl = "https://afternoon-oasis-64306.herokuapp.com"
 
     } else {
         console.log('Did not get environment');
