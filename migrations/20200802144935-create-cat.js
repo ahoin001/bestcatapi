@@ -9,17 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       catId: {
-        type: Sequelize.STRING,
-        allowNull:false
+        type: Sequelize.STRING
       },
       catImageUrl: {
-        type: Sequelize.STRING,
-        allowNull:false
+        type: Sequelize.STRING
       },
       loved: {
         type: Sequelize.BOOLEAN
-        ,
-        allowNull:false
       },
       createdAt: {
         allowNull: false,

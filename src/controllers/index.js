@@ -1,8 +1,7 @@
 // ? MODELS MUST BE IMPORTED THIS WAY IN THIS VERSION OF SEQUELIZE CLI
-const db = require('../../database/models/index');
+// const db = require('../../database/models/index');
+const db = require('../../models/index');
 const Cat = db.Cat
-
-// const db = require('../../database/config/index');
 
 const addCatToDB = async (req, res) => {
 
