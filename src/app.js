@@ -1,5 +1,7 @@
 // core modules
 path = require('path')
+http = require('http')
+db = require("../database/models/index")
 
 // npm packages
 require('dotenv').config()
@@ -20,8 +22,11 @@ app.use(cors())
 // support parsing of application/json type post data
 app.use(express.json());
 
+app.set('port', process.env.PORT || 2000);
+
 // set static assets for use
-app.use(express.static( path.join(__dirname, '../public')))
+app.use(express.static(path.join(__dirname, '../public')))
+
 
 app.use('/', catRoutes);
 
@@ -31,6 +36,12 @@ app.get('/apikeys', (req, res) => {
     })
 });
 
-app.listen(port, () =>
-    console.log(`Example app listening on port ${port} !`),
-);
+// app.listen(port, () =>
+//     console.log(`Example app listening on port ${port} !`),
+// );
+
+db.sequelize.sync().then(function () {
+    http.createServer(app).listen(app.get('port'), function () {
+        console.log('Express server listening on port ' + app.get('port'));
+    });
+});
