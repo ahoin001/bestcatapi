@@ -22,7 +22,7 @@ if (config.use_env_variable) {
 
     console.log(`@@@@@@@@@@@@ PRODUCTION: `, env)
     console.log(`@@@@@@@@@@@@ CONFIG: `, config)
-    console.log(`@@@@@@@@@@@@ DB URL: `, process.env.DB_DATABASE_UR)
+    console.log(`@@@@@@@@@@@@ DB URL: `, config.use_env_variable)
 
     sequelize = new Sequelize(config.use_env_variable, config);
 
