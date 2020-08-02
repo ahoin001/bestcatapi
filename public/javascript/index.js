@@ -165,7 +165,7 @@ const setRandomCatFromDatabase = async () => {
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
-            let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length - 1) + 1);
+            let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length - 1));
 
             console.log('INDEX OF RANDOM: ', randomCatIndex)
 
@@ -358,28 +358,5 @@ const getVotedCatsFromDatabase = async () => {
 
     });
 
-    // const recentCat = catsThatWereVoted.pop()
-
-    // if (recentCat.value === 1) {
-
-    //     const catID = recentCat.image_id;
-
-    //     const catImageInfo = await fetchCatApi(`https://api.thecatapi.com/v1/images/${catID}`)
-
-    //     // console.log('******', catImageInfo)
-
-    //     let lovedCatImg = document.createElement("img");
-
-    //     lovedCatImg.setAttribute("src", catImageInfo.url)
-    //     lovedCatImg.setAttribute("class", "fav-cat")
-
-    //     lovedCatPicsList.appendChild(lovedCatImg)
-
-    // } else {
-    //     console.log(`Cat not loved :( : ${recentCat} `)
-    // }
-
-
 }
 
-// setRandomCatFromDatabase()
