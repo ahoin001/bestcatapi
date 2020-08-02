@@ -165,18 +165,10 @@ const setRandomCatFromDatabase = async () => {
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
-
             let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length - 1) + 1);
 
-            while (catImageID === theListOfCats[randomCatIndex].catId) {
-
-                console.log(`WHOA! Same cat , we'll roll again!`)
-                randomCatIndex = Math.floor(Math.random() * (theListOfCats.length - 1) + 1);
-
-            }
-
             console.log('INDEX OF RANDOM: ', randomCatIndex)
-      
+
             const { catId, catImageUrl, loved } = theListOfCats[randomCatIndex]
 
             randomCatPic.setAttribute("src", catImageUrl)
