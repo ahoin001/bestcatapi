@@ -54,7 +54,7 @@ const getApiKeyDynamically = async () => {
     if (apiEnvironment !== 'development') {
         try {
             response = await fetch(
-                "https://bootleg-cat-api.herokuapp.com/apikeys",
+                "https://afternoon-oasis-64306.herokuapp.com/apikeys",
                 {
                     method: "GET",
                     headers: {
@@ -79,7 +79,7 @@ const getApiKeyDynamically = async () => {
 
     } else if (apiEnvironment === 'production') {
 
-        apiUrl = "https://bootleg-cat-api.herokuapp.com"
+        apiUrl = "https://afternoon-oasis-64306.herokuapp.com/"
 
     } else {
         console.log('Did not get environment');
