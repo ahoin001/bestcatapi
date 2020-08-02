@@ -81,6 +81,25 @@ const getApiKeyDynamically = async () => {
 
         apiUrl = "https://afternoon-oasis-64306.herokuapp.com"
 
+        const requestBody = JSON.stringify({
+            catId:'a2',
+            catImageUrl: "https://cdn2.thecatapi.com/images/a2.jpg"
+        })
+
+        try {
+
+            const addedCatToDatabaseResponse = await fetchCatDatabaseApi(
+                `${apiUrl}/cats`,
+                "POST",
+                requestBody)
+
+            console.log('Cat Added To Database: ', addedCatToDatabaseResponse)
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
     } else {
         console.log('Did not get environment');
     }
