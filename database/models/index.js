@@ -19,16 +19,18 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-    
-    console.log(`@@@@@@@@@@@@ PRODUCTION: `,env)
-    console.log(`@@@@@@@@@@@@ CONFIG: `,config)
+
+    console.log(`@@@@@@@@@@@@ PRODUCTION: `, env)
+    console.log(`@@@@@@@@@@@@ CONFIG: `, config)
 
     sequelize = new Sequelize(config.use_env_variable, config);
 
+    sequelize = new Sequelize(process.env.DB_DATABASE_URL, process.env.DB_USERNAME, process.env.DB_PASSWORD, config);
+
 } else {
 
-    console.log(`@@@@@@@@@@@@ DEVELOPMENT: `,env)
-    console.log(`@@@@@@@@@@@@ CONFIG: `,config)
+    console.log(`@@@@@@@@@@@@ DEVELOPMENT: `, env)
+    console.log(`@@@@@@@@@@@@ CONFIG: `, config)
 
     sequelize = new Sequelize(config.database, config.username, config.password, config);
 
