@@ -8,15 +8,6 @@ const config = require(__dirname + '/../config/config.json')[env];
 
 const db = {};
 
-// const sequelize = new Sequelize(
-//     process.env.DB_DATABASE_URL,
-//     process.env.DB_USERNAME,
-//     process.env.DB_PASSWORD,
-//     {
-//         dialect: 'postgres',
-//     },
-// );
-
 let sequelize;
 if (config.use_env_variable) {
 
