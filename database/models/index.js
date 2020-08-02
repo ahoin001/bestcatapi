@@ -23,9 +23,9 @@ if (config.use_env_variable) {
     console.log(`@@@@@@@@@@@@ PRODUCTION: `, env)
     console.log(`@@@@@@@@@@@@ CONFIG: `, config)
 
-    sequelize = new Sequelize(config.use_env_variable, config);
+    sequelize = new Sequelize(process.env.DB_DATABASE_URL, config);
 
-    sequelize = new Sequelize(process.env.DB_DATABASE_URL, process.env.DB_USERNAME, process.env.DB_PASSWORD, config);
+    // sequelize = new Sequelize(process.env.DB_DATABASE_URL, process.env.DB_USERNAME, process.env.DB_PASSWORD, config);
 
 } else {
 
