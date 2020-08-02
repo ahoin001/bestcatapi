@@ -49,22 +49,27 @@ const getApiKeyDynamically = async () => {
 
     } catch (error) {
         console.log(error)
+    }
 
-        response = await fetch(
-            "https://bootleg-cat-api.herokuapp.com/apikeys",
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+    if (apiEnvironment !== 'development') {
+        try {
+            response = await fetch(
+                "https://bootleg-cat-api.herokuapp.com/apikeys",
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
 
-        apiObject = await response.json()
+            apiObject = await response.json()
 
-        apiEnvironment = apiObject.status;
+            apiEnvironment = apiObject.status;
 
-        console.log(`Environment: `, apiEnvironment)
+            console.log(`Environment: `, apiEnvironment)
+        } catch (error) {
 
+        }
     }
 
 
@@ -153,9 +158,9 @@ const setRandomCatFromDatabase = async () => {
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
-            let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length -1) + 1);
+            let randomCatIndex = Math.floor(Math.random() * (theListOfCats.length - 1) + 1);
 
-            console.log('INDEX OF RANDOM: ',randomCatIndex)
+            console.log('INDEX OF RANDOM: ', randomCatIndex)
 
             const { catId, catImageUrl } = theListOfCats[randomCatIndex]
 
@@ -238,7 +243,7 @@ const deleteCatFromDatabase = async () => {
 
     const idOfCatToDelete = document.getElementById("catId").value;
 
-    console.log(`(FE) ID of Cat to be deleted: `,idOfCatToDelete)
+    console.log(`(FE) ID of Cat to be deleted: `, idOfCatToDelete)
 
     try {
 
