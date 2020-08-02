@@ -8,14 +8,14 @@ const config = require(__dirname + '/../config/config.json')[env];
 
 const db = {};
 
-// const sequelize = new Sequelize(
-//     process.env.DB_DATABASE_URL,
-//     process.env.DB_USERNAME,
-//     process.env.DB_PASSWORD,
-//     {
-//         dialect: 'postgres',
-//     },
-// );
+const sequelize = new Sequelize(
+    process.env.DB_DATABASE_URL,
+    process.env.DB_USERNAME,
+    process.env.DB_PASSWORD,
+    {
+        dialect: 'postgres',
+    },
+);
 
 let sequelize;
 if (config.use_env_variable) {
@@ -25,6 +25,15 @@ if (config.use_env_variable) {
     console.log(`@@@@@@@@@@@@ DB URL: `, config.use_env_variable)
 
     sequelize = new Sequelize(config.use_env_variable, config);
+    
+    sequelize = new Sequelize(
+        process.env.DB_DATABASE_URL,
+        process.env.DB_USERNAME,
+        process.env.DB_PASSWORD,
+        {
+            dialect: 'postgres',
+        },
+    );
 
     // sequelize = new Sequelize(process.env.DB_DATABASE_URL, process.env.DB_USERNAME, process.env.DB_PASSWORD, config);
 
