@@ -71,9 +71,10 @@ const getApiKeyDynamically = async () => {
 
                 console.log(`Environment: `, apiEnvironment)
             } catch (error) {
-
+                console.log(error)
             }
         }
+
         console.log(error)
 
     }
@@ -158,6 +159,7 @@ const setRandomCatFromDatabase = async () => {
         .then((objectReturnedFromQueryHoldingCatTable) => {
 
             console.log('SQL Response As Object with Cat Table(list)', objectReturnedFromQueryHoldingCatTable)
+            console.log('SQL Response As Cat Table(list) from object', objectReturnedFromQueryHoldingCatTable.cats)
 
             const theListOfCats = objectReturnedFromQueryHoldingCatTable.cats
 
