@@ -1,7 +1,7 @@
 // core modules
 path = require('path')
 http = require('http')
-db = require("../database/models/index")
+db = require("../database/models/index2")
 
 // npm packages
 require('dotenv').config()
