@@ -46,13 +46,11 @@ img {
 }
 
 .buttons-container {
-
   display: flex;
   justify-content: space-around;
 
   margin: 0 auto 10px auto;
   width: 900px;
-
 }
 
 .vote-bttn {
@@ -86,6 +84,10 @@ img {
   color: #fff;
   background-color: #343a40;
   border-color: #343a40;
+}
+
+.hide {
+  display: none;
 }
 
 /* *********************************** */

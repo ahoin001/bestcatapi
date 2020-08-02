@@ -12,6 +12,9 @@ let lovedCatPicsList = document.querySelector(".loved-cat-list")
 let catNameList = document.querySelector(".catname-list")
 
 let voteButtons = document.querySelectorAll(".vote-bttn")
+let unLoveButton = document.querySelector(".unlove")
+let loveButton = document.querySelector(".love")
+
 
 let catImageID;
 let lovedCats = [];
@@ -30,48 +33,48 @@ const getApiKeyDynamically = async () => {
 
     let apiEnvironment;
 
-    // try {
+    try {
 
-    //     response = await fetch(
-    //         "http://localhost:2000/apikeys",
-    //         {
-    //             method: "GET",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             }
-    //         })
+        response = await fetch(
+            "http://localhost:2000/apikeys",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
 
-    //     apiObject = await response.json()
+        apiObject = await response.json()
 
-    //     apiEnvironment = apiObject.status;
+        apiEnvironment = apiObject.status;
 
-    //     console.log(`Environment: `, apiEnvironment)
+        console.log(`Environment: `, apiEnvironment)
 
-    // } catch (error) {
-    //     console.log(error)
-    // }
+    } catch (error) {
 
-    if (apiEnvironment !== 'development') {
-        try {
-            response = await fetch(
-                "https://afternoon-oasis-64306.herokuapp.com/apikeys",
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
+        if (apiEnvironment !== 'development') {
+            try {
+                response = await fetch(
+                    "https://afternoon-oasis-64306.herokuapp.com/apikeys",
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
 
-            apiObject = await response.json()
+                apiObject = await response.json()
 
-            apiEnvironment = apiObject.status;
+                apiEnvironment = apiObject.status;
 
-            console.log(`Environment: `, apiEnvironment)
-        } catch (error) {
+                console.log(`Environment: `, apiEnvironment)
+            } catch (error) {
 
+            }
         }
-    }
+        console.log(error)
 
+    }
 
     if (apiEnvironment === 'development') {
 
@@ -80,25 +83,6 @@ const getApiKeyDynamically = async () => {
     } else if (apiEnvironment === 'production') {
 
         apiUrl = "https://afternoon-oasis-64306.herokuapp.com"
-
-        const requestBody = JSON.stringify({
-            catId:'a2',
-            catImageUrl: "https://cdn2.thecatapi.com/images/a2.jpg"
-        })
-
-        try {
-
-            const addedCatToDatabaseResponse = await fetchCatDatabaseApi(
-                `${apiUrl}/cats`,
-                "POST",
-                requestBody)
-
-            console.log('Cat Added To Database: ', addedCatToDatabaseResponse)
-
-        } catch (error) {
-            console.log(error)
-        }
-
 
     } else {
         console.log('Did not get environment');
@@ -181,13 +165,25 @@ const setRandomCatFromDatabase = async () => {
 
             console.log('INDEX OF RANDOM: ', randomCatIndex)
 
-            const { catId, catImageUrl } = theListOfCats[randomCatIndex]
+            const { catId, catImageUrl, loved } = theListOfCats[randomCatIndex]
 
             randomCatPic.setAttribute("src", catImageUrl)
 
             // ? Set global cat imageID from the new random cat for votes
             catImageID = catId;
-            console.log(`%%%%%%%%%%%%% Cat ID: `, catImageID)
+ 
+            if (loved) {
+              
+                unLoveButton.classList.remove('hide')
+                loveButton.classList.add('hide')
+            } else {
+            
+                unLoveButton.classList.add('hide')
+                loveButton.classList.remove('hide')
+            
+            }
+
+            
 
         })
 
@@ -256,6 +252,42 @@ const loveCatVoteToDatabase = async () => {
     })
 
 }
+const unLoveCatVoteToDatabase = async () => {
+
+
+    voteButtons.forEach(bttn => {
+        bttn.disabled = true;
+    })
+
+    // ? Convert Request to JSON for transfer to api
+    let requestBodyLovedCat = JSON.stringify({
+        idOfCatToLove: catImageID,
+        loved: false
+    })
+
+    // console.log('(FE) Your cat vote: ', requestBodyLovedCat)
+
+    try {
+
+        const responseAfterUpdatingCat = await fetchCatDatabaseApi(
+            // "http://localhost:2000/cats",
+            `${apiUrl}/cats`,
+            "PATCH",
+            requestBodyLovedCat)
+
+        console.log(responseAfterUpdatingCat)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    await setRandomCatFromDatabase()
+
+    voteButtons.forEach(bttn => {
+        bttn.disabled = false;
+    })
+
+}
 
 
 const deleteCatFromDatabase = async () => {
@@ -293,6 +325,11 @@ const getVotedCatsFromDatabase = async () => {
 
     } catch (error) {
         console.log(error)
+    }
+
+    // Clear previous list
+    while (lovedCatPicsList.hasChildNodes()) {
+        lovedCatPicsList.removeChild(lovedCatPicsList.firstChild);
     }
 
     const lovedCats = lovedCatsFromDatabaseResponse.lovedCats;
