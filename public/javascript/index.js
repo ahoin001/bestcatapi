@@ -53,6 +53,8 @@ const getApiKeyDynamically = async () => {
         console.log(`Environment: `, apiEnvironment)
 
     } catch (error) {
+        console.log('Could it reach local development server? ')
+        console.log(error)
 
         if (apiEnvironment !== 'development') {
             try {
@@ -70,12 +72,12 @@ const getApiKeyDynamically = async () => {
                 apiEnvironment = apiObject.status;
 
                 console.log(`Environment: `, apiEnvironment)
+
             } catch (error) {
                 console.log(error)
             }
         }
 
-        console.log(error)
 
     }
 
@@ -173,7 +175,7 @@ const setRandomCatFromDatabase = async () => {
 
             // ? Set global cat imageID from the new random cat for votes
             catImageID = catId;
-            
+
             if (loved) {
 
                 unLoveButton.classList.remove('hide')
@@ -333,17 +335,26 @@ const getVotedCatsFromDatabase = async () => {
         lovedCatPicsList.removeChild(lovedCatPicsList.firstChild);
     }
 
-    const lovedCats = lovedCatsFromDatabaseResponse.lovedCats;
+    let lovedCats; 
+
+    if (lovedCatsFromDatabaseResponse.lovedCats) {
+        
+        lovedCats = lovedCatsFromDatabaseResponse.lovedCats;
+
+    } else {
+         lovedCats =[]; 
+    }
 
     lovedCats.forEach((cat) => {
 
-        let lovedCatImg = document.createElement("img");
+        if (cat) {
+            let lovedCatImg = document.createElement("img");
 
-        lovedCatImg.setAttribute("src", cat.catImageUrl)
-        lovedCatImg.setAttribute("class", "fav-cat")
+            lovedCatImg.setAttribute("src", cat.catImageUrl)
+            lovedCatImg.setAttribute("class", "fav-cat")
 
-        lovedCatPicsList.appendChild(lovedCatImg)
-
+            lovedCatPicsList.appendChild(lovedCatImg)
+        }
 
     });
 
