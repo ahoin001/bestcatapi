@@ -17,6 +17,8 @@ let loveButton = document.querySelector(".love")
 
 
 let catImageID;
+let catImageUrl;
+
 let lovedCats = [];
 
 let apiUrl;
@@ -97,7 +99,6 @@ const getApiKeyDynamically = async () => {
 //? CATDATABASE FUNCTIONS (RECREATED CAT API FOR PRACTICE)
 // ****************************************************************
 
-
 // ? Default fetch to database will be a get request returning all cats
 const fetchCatDatabaseApi = async (url = `${apiUrl}/cats`, requestType = "GET", requestBody) => {
 
@@ -140,7 +141,6 @@ const fetchCatDatabaseApi = async (url = `${apiUrl}/cats`, requestType = "GET", 
             console.log(error)
         }
 
-
     }
 
     // So .json won't have to be called everywhere
@@ -171,19 +171,17 @@ const setRandomCatFromDatabase = async () => {
 
             // ? Set global cat imageID from the new random cat for votes
             catImageID = catId;
- 
+            
             if (loved) {
-              
+
                 unLoveButton.classList.remove('hide')
                 loveButton.classList.add('hide')
             } else {
-            
+
                 unLoveButton.classList.add('hide')
                 loveButton.classList.remove('hide')
-            
-            }
 
-            
+            }
 
         })
 
@@ -193,12 +191,13 @@ const setRandomCatFromDatabase = async () => {
 
 const addCatToCatBase = async () => {
 
-    const catId = document.getElementById("catId").value;
-    const catImageUrl = document.getElementById("catPic").value;
+    const aNewCatCatId = document.getElementById("catId").value;
+    const newCatCatImageUrl = document.getElementById("catPic").value;
 
     const requestBody = JSON.stringify({
-        catId,
-        catImageUrl
+        catId: aNewCatCatId,
+        catImageUrl: newCatCatImageUrl
+
     })
 
     try {
