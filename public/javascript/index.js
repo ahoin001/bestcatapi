@@ -273,6 +273,7 @@ const unLoveCatVoteToDatabase = async () => {
     try {
 
         const responseAfterUpdatingCat = await fetchCatDatabaseApi(
+            // "http://localhost:2000/cats",
             `${apiUrl}/cats`,
             "PATCH",
             requestBodyLovedCat)
@@ -301,6 +302,7 @@ const deleteCatFromDatabase = async () => {
     try {
 
         const DeletedCatFromDatabaseResponse = await fetchCatDatabaseApi(
+            // `http://localhost:2000/cats/${idOfCatToDelete}`,
             `${apiUrl}/cats/${idOfCatToDelete}`,
             "DELETE",
         )
@@ -333,14 +335,14 @@ const getVotedCatsFromDatabase = async () => {
         lovedCatPicsList.removeChild(lovedCatPicsList.firstChild);
     }
 
-    let lovedCats;
+    let lovedCats; 
 
     if (lovedCatsFromDatabaseResponse.lovedCats) {
-
+        
         lovedCats = lovedCatsFromDatabaseResponse.lovedCats;
 
     } else {
-        lovedCats = [];
+         lovedCats =[]; 
     }
 
     lovedCats.forEach((cat) => {
