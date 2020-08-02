@@ -2,6 +2,8 @@
 const db = require('../../database/models/index');
 const Cat = db.Cat
 
+// const db = require('../../database/config/index');
+
 const addCatToDB = async (req, res) => {
 
     console.log(req.body)
