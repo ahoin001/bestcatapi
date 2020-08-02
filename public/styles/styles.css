@@ -80,11 +80,54 @@ img {
   border-color: transparent;
 }
 
-.btn-dark {
-  color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
+.bttn-danger {
+  font-size: 20px;
+  font-weight: 600;
+
+  background-color: transparent;
+  color: #c53030;
+
+  padding-top: 8px;
+  padding-bottom: 8px; /*//0.5rem; */
+  padding-left: 16px;
+  padding-right: 16px;
+
+  border-width: 1px;
+  border-color: #f56565;
+  border-radius: 4px;
+  
 }
+
+.bttn-danger:hover {
+  background-color: #fc8181;
+  color: #fff;
+  border-color: transparent;
+}
+
+.bttn-next {
+  font-size: 20px;
+  font-weight: 600;
+
+  background-color: transparent;
+  color: #2f855a;
+
+  padding-top: 8px;
+  padding-bottom: 8px; /*//0.5rem; */
+  padding-left: 16px;
+  padding-right: 16px;
+
+  border-width: 1px;
+  border-color: #48bb78;
+  border-radius: 4px;
+  
+}
+
+.bttn-next:hover {
+  background-color: #48bb78;
+  color: #fff;
+  border-color: transparent;
+}
+
 
 .hide {
   display: none;
