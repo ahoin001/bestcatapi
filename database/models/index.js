@@ -25,7 +25,7 @@ if (config.use_env_variable) {
   // });
 
   // line that was here
-  console.log('++++++++++++++++++++ CONNECTING IN PRODUCTION USING URL: ',config)
+  console.log('++++++++++++++++++++ CONNECTING IN PRODUCTION USING URL: ',config.use_env_variable)
   sequelize = new Sequelize(config.use_env_variable, config);
 
 } else {
