@@ -9,11 +9,28 @@ const addCatToDB = async (req, res) => {
 
     try {
 
-        const cat = await Cat.create({
+        const cat = await Cat.bulkcreate([
+            {
+            catId: "MjAyNDc5Ng",
+            catImageUrl: "https://cdn2.thecatapi.com/images/MjAyNDc5Ng.jpg",
+            loved: false
+        },
+            {
+            catId:"dp9",
+            catImageUrl: "https://cdn2.thecatapi.com/images/dp9.jpg",
+            loved: false
+        },
+            {
+            catId: "ai5",
+            catImageUrl: "https://cdn2.thecatapi.com/images/ai5.jpg",
+            loved: false
+        },
+            {
             catId: req.body.catId,
             catImageUrl: req.body.catImageUrl,
             loved: false
-        });
+        },
+    ]);
         return res.status(201).json({
             cat,
         });
