@@ -1,8 +1,10 @@
 // core modules
 path = require('path')
 http = require('http')
-// db = require("../database/models/index")
+
+// db instance
 db = require("../models/index")
+
 // npm packages
 require('dotenv').config()
 express = require('express')
@@ -30,15 +32,12 @@ app.use(express.static(path.join(__dirname, '../public')))
 
 app.use('/', catRoutes);
 
+// to get environment being used
 app.get('/apikeys', (req, res) => {
     res.json({
         status: process.env.NODE_ENV || 'development',
     })
 });
-
-// app.listen(port, () =>
-//     console.log(`Example app listening on port ${port} !`),
-// );
 
 db.sequelize.sync().then(function () {
     http.createServer(app).listen(app.get('port'), function () {

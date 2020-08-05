@@ -1,5 +1,4 @@
 // ? MODELS MUST BE IMPORTED THIS WAY IN THIS VERSION OF SEQUELIZE CLI
-// const db = require('../../database/models/index');
 const db = require('../../models/index');
 const Cat = db.Cat
 
@@ -49,8 +48,6 @@ const getlovedCatsFromDB = async (req, res) => {
                 loved: true
             }
         });
-
-        // console.log('(BACKEND) QUERYING CAT DATABASE :', lovedCats)
 
         return res.json({
             lovedCats
